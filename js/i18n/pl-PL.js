@@ -17,7 +17,7 @@ window.I18N.registerLocale('pl-PL', {
   legend_hint: 'klawisze 0–5 | kliknij i przeciągnij',
   btn_clear: 'Wyczyść',
   btn_fill: 'Wypełnij wszystko',
-  btn_invert: 'Odwróć',
+  btn_invert: 'Losowo',
   btn_push: '▶ Zastosuj na GitHub',
   days_painted: 'Pomalowane dni:',
   commits: 'Commity:',

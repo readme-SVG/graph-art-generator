@@ -17,7 +17,7 @@ window.I18N.registerLocale('zh-CN', {
   legend_hint: '按键 0–5 | 点击并拖动',
   btn_clear: '清空',
   btn_fill: '全部填充',
-  btn_invert: '反转',
+  btn_invert: '随机',
   btn_push: '▶ 应用到 GitHub',
   days_painted: '已绘制天数：',
   commits: '提交数：',

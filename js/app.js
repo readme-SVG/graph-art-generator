@@ -173,10 +173,16 @@ document.getElementById('fillBtn').addEventListener('click', ()=>{
   });
   updateStats();
 });
+function randomLevelByMultiplier(){
+  const mult = +document.getElementById('multiplier').value;
+  const maxLevel = Math.min(4, Math.max(1, Math.ceil(mult / 2.5)));
+  return Math.floor(Math.random() * (maxLevel + 1));
+}
+
 document.getElementById('invertBtn').addEventListener('click', ()=>{
   document.querySelectorAll('.cell:not(.out)').forEach(c=>{
     const i = +c.dataset.i;
-    grid[i] = grid[i] === 0 ? resolveLevel() : 0;
+    grid[i] = randomLevelByMultiplier();
     c.style.background = COLORS[grid[i]];
   });
   updateStats();

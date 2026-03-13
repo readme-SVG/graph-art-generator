@@ -17,7 +17,7 @@ window.I18N.registerLocale('en-US', {
   legend_hint: 'keys 0–5 | click and drag',
   btn_clear: 'Clear',
   btn_fill: 'Fill all',
-  btn_invert: 'Invert',
+  btn_invert: 'Random',
   btn_push: '▶ Apply to GitHub',
   days_painted: 'Days painted:',
   commits: 'Commits:',

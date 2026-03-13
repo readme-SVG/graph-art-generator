@@ -17,7 +17,7 @@ window.I18N.registerLocale('uk-UA', {
   legend_hint: 'клавіші 0–5 | затисніть і ведіть',
   btn_clear: 'Очистити',
   btn_fill: 'Заповнити все',
-  btn_invert: 'Інвертувати',
+  btn_invert: 'Випадково',
   btn_push: '▶ Застосувати в GitHub',
   days_painted: 'Зафарбовано днів:',
   commits: 'Комітів:',

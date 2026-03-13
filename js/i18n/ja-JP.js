@@ -17,7 +17,7 @@ window.I18N.registerLocale('ja-JP', {
   legend_hint: 'キー 0–5 | クリックしてドラッグ',
   btn_clear: 'クリア',
   btn_fill: 'すべて塗る',
-  btn_invert: '反転',
+  btn_invert: 'ランダム',
   btn_push: '▶ GitHub に適用',
   days_painted: '塗った日数:',
   commits: 'コミット数:',

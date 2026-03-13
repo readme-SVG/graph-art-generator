@@ -17,7 +17,7 @@ window.I18N.registerLocale('nl-NL', {
   legend_hint: 'toetsen 0–5 | klik en sleep',
   btn_clear: 'Wissen',
   btn_fill: 'Alles vullen',
-  btn_invert: 'Omkeren',
+  btn_invert: 'Willekeurig',
   btn_push: '▶ Toepassen op GitHub',
   days_painted: 'Ingekleurde dagen:',
   commits: 'Commits:',

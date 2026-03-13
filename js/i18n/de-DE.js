@@ -17,7 +17,7 @@ window.I18N.registerLocale('de-DE', {
   legend_hint: 'Tasten 0–5 | klicken und ziehen',
   btn_clear: 'Leeren',
   btn_fill: 'Alles füllen',
-  btn_invert: 'Invertieren',
+  btn_invert: 'Zufällig',
   btn_push: '▶ Auf GitHub anwenden',
   days_painted: 'Bemalte Tage:',
   commits: 'Commits:',

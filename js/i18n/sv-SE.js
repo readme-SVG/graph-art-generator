@@ -17,7 +17,7 @@ window.I18N.registerLocale('sv-SE', {
   legend_hint: 'tangenter 0–5 | klicka och dra',
   btn_clear: 'Rensa',
   btn_fill: 'Fyll allt',
-  btn_invert: 'Invertera',
+  btn_invert: 'Slumpmässigt',
   btn_push: '▶ Använd på GitHub',
   days_painted: 'Färgade dagar:',
   commits: 'Commits:',

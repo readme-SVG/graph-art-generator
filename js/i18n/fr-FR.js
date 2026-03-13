@@ -17,7 +17,7 @@ window.I18N.registerLocale('fr-FR', {
   legend_hint: 'touches 0–5 | cliquer et glisser',
   btn_clear: 'Effacer',
   btn_fill: 'Tout remplir',
-  btn_invert: 'Inverser',
+  btn_invert: 'Aléatoire',
   btn_push: '▶ Appliquer sur GitHub',
   days_painted: 'Jours peints :',
   commits: 'Commits :',

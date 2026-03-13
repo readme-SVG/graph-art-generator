@@ -17,7 +17,7 @@ window.I18N.registerLocale('cs-CZ', {
   legend_hint: 'klávesy 0–5 | klikni a táhni',
   btn_clear: 'Vyčistit',
   btn_fill: 'Vyplnit vše',
-  btn_invert: 'Invertovat',
+  btn_invert: 'Náhodně',
   btn_push: '▶ Použít na GitHub',
   days_painted: 'Obarvené dny:',
   commits: 'Commity:',

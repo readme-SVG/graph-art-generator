@@ -17,7 +17,7 @@ window.I18N.registerLocale('kk-KZ', {
   legend_hint: '0–5 пернелері | басып сүйреңіз',
   btn_clear: 'Тазалау',
   btn_fill: 'Барлығын толтыру',
-  btn_invert: 'Кері аудару',
+  btn_invert: 'Кездейсоқ',
   btn_push: '▶ GitHub-қа қолдану',
   days_painted: 'Боялған күндер:',
   commits: 'Commit саны:',

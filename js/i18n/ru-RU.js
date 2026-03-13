@@ -17,7 +17,7 @@ window.I18N.registerLocale('ru-RU', {
   legend_hint: 'клавиши 0–5 | зажмите и ведите',
   btn_clear: 'Очистить',
   btn_fill: 'Залить всё',
-  btn_invert: 'Инвертировать',
+  btn_invert: 'Рандомно',
   btn_push: '▶ Применить на GitHub',
   days_painted: 'Закрашено дней:',
   commits: 'Коммитов:',
