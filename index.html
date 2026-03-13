@@ -183,6 +183,17 @@
     </div>
     <div class="field-row" style="margin-top:10px">
       <div class="field">
+        <label>Твой email на GitHub</label>
+        <input type="text" id="email" placeholder="you@example.com">
+        <div class="hint">Должен совпадать с email в <a href="https://github.com/settings/emails" target="_blank">настройках GitHub</a> — иначе коммиты не появятся на графе.</div>
+      </div>
+      <div class="field">
+        <label>Твоё имя (git)</label>
+        <input type="text" id="gitname" placeholder="Your Name">
+      </div>
+    </div>
+    <div class="field-row" style="margin-top:10px">
+      <div class="field">
         <label>Ветка</label>
         <input type="text" id="branch" value="main">
       </div>
@@ -358,10 +369,13 @@ async function doPush(){
   const repo=document.getElementById('repo').value.trim();
   const branch=document.getElementById('branch').value.trim()||'main';
   const mult=+document.getElementById('multiplier').value;
+  const email=document.getElementById('email').value.trim();
+  const gitname=document.getElementById('gitname').value.trim()||'GitHub Painter';
   const start=getStart();
 
   if(!token){alert('Введи GitHub токен');return;}
   if(!repo||!repo.includes('/')){alert('Введи репозиторий в формате username/repo');return;}
+  if(!email){alert('Введи email — он должен совпадать с email в настройках GitHub');return;}
 
   const commits=[];
   for(let c=0;c<COLS;c++){
@@ -413,8 +427,8 @@ async function doPush(){
 
       const commitPayload={
         message:`painted ${cm.idx}`,tree:tree.sha,
-        author:{name:'GitHub Painter',email:'painter@users.noreply.github.com',date:cm.date},
-        committer:{name:'GitHub Painter',email:'painter@users.noreply.github.com',date:cm.date},
+        author:{name:gitname,email:email,date:cm.date},
+        committer:{name:gitname,email:email,date:cm.date},
         parents:currentSha?[currentSha]:[]
       };
       const newCommit=await api(token,'POST',`/repos/${repo}/git/commits`,commitPayload);
