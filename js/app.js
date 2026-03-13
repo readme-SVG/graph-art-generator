@@ -136,8 +136,13 @@ function paint(cell){
 
 function updateStats(){
   const mult = +document.getElementById('multiplier').value;
+  const isSpreadEnabled = document.getElementById('commitSpread').value === 'plus2';
+  const minCommits = grid.reduce((a,v)=>a+v*mult,0);
+  const maxCommits = isSpreadEnabled ? minCommits + grid.filter(v=>v>0).length * 2 : minCommits;
   document.getElementById('sDays').textContent = grid.filter(v=>v>0).length;
-  document.getElementById('sCommits').textContent = grid.reduce((a,v)=>a+v*mult,0).toLocaleString();
+  document.getElementById('sCommits').textContent = isSpreadEnabled
+    ? `${minCommits.toLocaleString()}-${maxCommits.toLocaleString()}`
+    : minCommits.toLocaleString();
   const end = new Date(startDate); end.setDate(end.getDate() + totalCols * 7 - 1);
   const fmt = d => d.toLocaleDateString(lang,{day:'numeric',month:'short',year:'numeric'});
   document.getElementById('sPeriod').textContent = fmt(startDate) + ' \u2014 ' + fmt(end);
@@ -158,6 +163,7 @@ document.addEventListener('keydown', e=>{
 });
 document.addEventListener('mouseup', ()=> isDown = false);
 document.getElementById('multiplier').addEventListener('change', updateStats);
+document.getElementById('commitSpread').addEventListener('change', updateStats);
 
 document.getElementById('clearBtn').addEventListener('click', ()=>{
   grid = Array(totalCols * ROWS).fill(0);
@@ -206,6 +212,7 @@ async function doPush(){
   const repo    = document.getElementById('repo').value.trim();
   const branch  = document.getElementById('branch').value.trim() || 'main';
   const mult    = +document.getElementById('multiplier').value;
+  const spreadMode = document.getElementById('commitSpread').value;
   const email   = document.getElementById('email').value.trim();
   const gitname = document.getElementById('gitname').value.trim() || 'GitHub Painter';
 
@@ -222,7 +229,10 @@ async function doPush(){
       d.setDate(d.getDate() + c * 7 + r);
       d.setHours(12,0,0,0);
       const iso = d.toISOString().replace(/\.\d{3}Z$/, '+00:00');
-      for(let k = 0; k < level * mult; k++) commits.push({ date:iso, idx:`${c}-${r}-${k}` });
+      const baseCount = level * mult;
+      const spreadBoost = spreadMode === 'plus2' ? Math.floor(Math.random() * 3) : 0;
+      const commitCount = baseCount + spreadBoost;
+      for(let k = 0; k < commitCount; k++) commits.push({ date:iso, idx:`${c}-${r}-${k}` });
     }
   }
   if(!commits.length){ alert(t('alert_empty')); return; }
