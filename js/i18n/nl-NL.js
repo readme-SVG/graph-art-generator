@@ -14,7 +14,7 @@ window.I18N.registerLocale('nl-NL', {
   year_hint: 'De grafiek toont het volledige geselecteerde jaar',
   editor_title: 'Editor',
   intensity: 'Intensiteit:',
-  legend_hint: 'toetsen 0–4 | klik en sleep',
+  legend_hint: 'toetsen 0–5 | klik en sleep',
   btn_clear: 'Wissen',
   btn_fill: 'Alles vullen',
   btn_invert: 'Omkeren',

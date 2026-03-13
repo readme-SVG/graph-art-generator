@@ -35,7 +35,7 @@ document.getElementById('langSelect').addEventListener('change', e=>{
 
 // ── Graph state ──
 const ROWS = 7;
-const COLORS = ['#21262d','#0D4429','#016C31','#26A641','#39D353'];
+const COLORS = ['#21262d','#0D4429','#016C31','#26A641','#39D353','#f39c12'];
 let grid = [], selLevel = 0, isDown = false;
 let startDate = new Date();
 let totalCols = 53;
@@ -120,11 +120,17 @@ function rebuildGraph(){
   updateStats();
 }
 
+function resolveLevel(){
+  if(selLevel === 5) return Math.floor(Math.random() * 5);
+  return selLevel;
+}
+
 function paint(cell){
   if(cell.classList.contains('out')) return;
   const i = +cell.dataset.i;
-  grid[i] = selLevel;
-  cell.style.background = COLORS[selLevel];
+  const level = resolveLevel();
+  grid[i] = level;
+  cell.style.background = COLORS[level];
   updateStats();
 }
 
@@ -145,7 +151,7 @@ document.querySelectorAll('.swatch').forEach(s => s.addEventListener('click', ()
 document.addEventListener('keydown', e=>{
   if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
   const n = parseInt(e.key);
-  if(n >= 0 && n <= 4){
+  if(n >= 0 && n <= 5){
     selLevel = n;
     document.querySelectorAll('.swatch').forEach(s => s.classList.toggle('sel', +s.dataset.level === n));
   }
@@ -160,13 +166,18 @@ document.getElementById('clearBtn').addEventListener('click', ()=>{
 });
 document.getElementById('fillBtn').addEventListener('click', ()=>{
   document.querySelectorAll('.cell:not(.out)').forEach(c=>{
-    const i = +c.dataset.i; grid[i] = selLevel; c.style.background = COLORS[selLevel];
+    const i = +c.dataset.i;
+    const level = resolveLevel();
+    grid[i] = level;
+    c.style.background = COLORS[level];
   });
   updateStats();
 });
 document.getElementById('invertBtn').addEventListener('click', ()=>{
   document.querySelectorAll('.cell:not(.out)').forEach(c=>{
-    const i = +c.dataset.i; grid[i] = grid[i] === 0 ? selLevel : 0; c.style.background = COLORS[grid[i]];
+    const i = +c.dataset.i;
+    grid[i] = grid[i] === 0 ? resolveLevel() : 0;
+    c.style.background = COLORS[grid[i]];
   });
   updateStats();
 });

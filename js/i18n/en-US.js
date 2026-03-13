@@ -14,7 +14,7 @@ window.I18N.registerLocale('en-US', {
   year_hint: 'The graph covers the entire selected year',
   editor_title: 'Editor',
   intensity: 'Intensity:',
-  legend_hint: 'keys 0–4 | click and drag',
+  legend_hint: 'keys 0–5 | click and drag',
   btn_clear: 'Clear',
   btn_fill: 'Fill all',
   btn_invert: 'Invert',

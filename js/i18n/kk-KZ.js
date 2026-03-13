@@ -14,7 +14,7 @@ window.I18N.registerLocale('kk-KZ', {
   year_hint: 'График таңдалған жылды толық қамтиды',
   editor_title: 'Редактор',
   intensity: 'Қарқындылық:',
-  legend_hint: '0–4 пернелері | басып сүйреңіз',
+  legend_hint: '0–5 пернелері | басып сүйреңіз',
   btn_clear: 'Тазалау',
   btn_fill: 'Барлығын толтыру',
   btn_invert: 'Кері аудару',

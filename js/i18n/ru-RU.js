@@ -14,7 +14,7 @@ window.I18N.registerLocale('ru-RU', {
   year_hint: 'График охватывает весь выбранный год',
   editor_title: 'Редактор',
   intensity: 'Интенсивность:',
-  legend_hint: 'клавиши 0–4 | зажмите и ведите',
+  legend_hint: 'клавиши 0–5 | зажмите и ведите',
   btn_clear: 'Очистить',
   btn_fill: 'Залить всё',
   btn_invert: 'Инвертировать',
