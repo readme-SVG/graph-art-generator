@@ -14,7 +14,7 @@ window.I18N.registerLocale('ja-JP', {
   year_hint: 'グラフは選択した年全体を表示します',
   editor_title: 'エディタ',
   intensity: '強度:',
-  legend_hint: 'キー 0–4 | クリックしてドラッグ',
+  legend_hint: 'キー 0–5 | クリックしてドラッグ',
   btn_clear: 'クリア',
   btn_fill: 'すべて塗る',
   btn_invert: '反転',

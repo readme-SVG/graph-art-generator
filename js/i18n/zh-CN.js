@@ -14,7 +14,7 @@ window.I18N.registerLocale('zh-CN', {
   year_hint: '图表覆盖所选年份的全部日期',
   editor_title: '编辑器',
   intensity: '强度：',
-  legend_hint: '按键 0–4 | 点击并拖动',
+  legend_hint: '按键 0–5 | 点击并拖动',
   btn_clear: '清空',
   btn_fill: '全部填充',
   btn_invert: '反转',

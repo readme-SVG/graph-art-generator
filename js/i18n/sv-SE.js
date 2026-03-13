@@ -14,7 +14,7 @@ window.I18N.registerLocale('sv-SE', {
   year_hint: 'Grafen täcker hela det valda året',
   editor_title: 'Redigerare',
   intensity: 'Intensitet:',
-  legend_hint: 'tangenter 0–4 | klicka och dra',
+  legend_hint: 'tangenter 0–5 | klicka och dra',
   btn_clear: 'Rensa',
   btn_fill: 'Fyll allt',
   btn_invert: 'Invertera',

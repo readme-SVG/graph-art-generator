@@ -14,7 +14,7 @@ window.I18N.registerLocale('uk-UA', {
   year_hint: 'Графік охоплює весь вибраний рік',
   editor_title: 'Редактор',
   intensity: 'Інтенсивність:',
-  legend_hint: 'клавіші 0–4 | затисніть і ведіть',
+  legend_hint: 'клавіші 0–5 | затисніть і ведіть',
   btn_clear: 'Очистити',
   btn_fill: 'Заповнити все',
   btn_invert: 'Інвертувати',
