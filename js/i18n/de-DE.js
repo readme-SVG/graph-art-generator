@@ -14,7 +14,7 @@ window.I18N.registerLocale('de-DE', {
   year_hint: 'Der Graph deckt das gesamte ausgewählte Jahr ab',
   editor_title: 'Editor',
   intensity: 'Intensität:',
-  legend_hint: 'Tasten 0–4 | klicken und ziehen',
+  legend_hint: 'Tasten 0–5 | klicken und ziehen',
   btn_clear: 'Leeren',
   btn_fill: 'Alles füllen',
   btn_invert: 'Invertieren',

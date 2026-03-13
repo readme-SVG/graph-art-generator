@@ -14,7 +14,7 @@ window.I18N.registerLocale('cs-CZ', {
   year_hint: 'Graf pokrývá celý vybraný rok',
   editor_title: 'Editor',
   intensity: 'Intenzita:',
-  legend_hint: 'klávesy 0–4 | klikni a táhni',
+  legend_hint: 'klávesy 0–5 | klikni a táhni',
   btn_clear: 'Vyčistit',
   btn_fill: 'Vyplnit vše',
   btn_invert: 'Invertovat',

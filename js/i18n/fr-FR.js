@@ -14,7 +14,7 @@ window.I18N.registerLocale('fr-FR', {
   year_hint: 'Le graphe couvre toute l’année sélectionnée',
   editor_title: 'Éditeur',
   intensity: 'Intensité :',
-  legend_hint: 'touches 0–4 | cliquer et glisser',
+  legend_hint: 'touches 0–5 | cliquer et glisser',
   btn_clear: 'Effacer',
   btn_fill: 'Tout remplir',
   btn_invert: 'Inverser',

@@ -14,7 +14,7 @@ window.I18N.registerLocale('pl-PL', {
   year_hint: 'Wykres obejmuje cały wybrany rok',
   editor_title: 'Edytor',
   intensity: 'Intensywność:',
-  legend_hint: 'klawisze 0–4 | kliknij i przeciągnij',
+  legend_hint: 'klawisze 0–5 | kliknij i przeciągnij',
   btn_clear: 'Wyczyść',
   btn_fill: 'Wypełnij wszystko',
   btn_invert: 'Odwróć',
