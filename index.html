@@ -6,162 +6,91 @@
 <title>GitHub Contribution Painter</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #0d1117;
-    --bg2: #161b22;
-    --bg3: #21262d;
-    --border: #30363d;
-    --text: #e6edf3;
-    --text2: #8b949e;
-    --text3: #484f58;
-    --green: #39d353;
-    --green-btn: #238636;
-    --green-btn-hover: #2ea043;
-    --red: #f85149;
-    --accent: #58a6ff;
+    --bg: #0d1117; --bg2: #161b22; --bg3: #21262d;
+    --border: #30363d; --text: #e6edf3; --text2: #8b949e; --text3: #484f58;
+    --green: #39d353; --green-btn: #238636; --green-hover: #2ea043;
+    --red: #f85149; --accent: #58a6ff;
   }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-    font-size: 14px;
-    min-height: 100vh;
-    padding: 32px 16px;
-  }
-
-  .container { max-width: 920px; margin: 0 auto; }
-
-  header { margin-bottom: 28px; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size: 14px; min-height: 100vh; padding: 28px 16px; }
+  .container { max-width: 940px; margin: 0 auto; }
+  header { margin-bottom: 24px; }
   header h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
   header p { color: var(--text2); font-size: 13px; line-height: 1.7; }
-  header a { color: var(--accent); text-decoration: none; }
-  header a:hover { text-decoration: underline; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code { background: var(--bg3); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
 
-  .card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-  }
-  .card-title {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text2);
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    margin-bottom: 14px;
-  }
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+  .card-title { font-size: 11px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 14px; }
 
-  .field { margin-bottom: 12px; }
+  .field { margin-bottom: 10px; }
   .field:last-child { margin-bottom: 0; }
-  .field label { display: block; font-size: 13px; color: var(--text2); margin-bottom: 5px; }
+  .field label { display: block; font-size: 12px; color: var(--text2); margin-bottom: 4px; }
   .field-row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .field-row .field { flex: 1; min-width: 160px; margin-bottom: 0; }
-
-  input[type=text], input[type=password], input[type=date], select {
-    width: 100%;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-    font-size: 13px;
-    padding: 6px 10px;
-    height: 34px;
-    outline: none;
-    transition: border-color .15s;
-    -webkit-appearance: none;
+  .field-row .field { flex: 1; min-width: 150px; margin-bottom: 0; }
+  input[type=text], input[type=password], input[type=number], select {
+    width: 100%; background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 6px; color: var(--text); font-size: 13px;
+    padding: 6px 10px; height: 34px; outline: none; transition: border-color .15s;
   }
   input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(88,166,255,.1); }
   input::placeholder { color: var(--text3); }
+  .hint { font-size: 11px; color: var(--text3); margin-top: 4px; line-height: 1.5; }
 
-  .hint { font-size: 12px; color: var(--text3); margin-top: 5px; line-height: 1.5; }
-  .hint a { color: var(--accent); text-decoration: none; }
-  .hint a:hover { text-decoration: underline; }
-  code { background: var(--bg3); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+  
 
-  .legend { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+  /* LEGEND */
+  .legend { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
   .legend-label { font-size: 12px; color: var(--text2); }
-  .swatch {
-    width: 16px; height: 16px; border-radius: 3px; cursor: pointer;
-    border: 2px solid transparent; transition: border-color .1s, transform .12s; flex-shrink: 0;
-  }
+  .swatch { width: 16px; height: 16px; border-radius: 3px; cursor: pointer; border: 2px solid transparent; transition: border-color .1s, transform .12s; flex-shrink: 0; }
   .swatch.sel { border-color: #fff; transform: scale(1.3); }
-  .legend-key { font-size: 11px; color: var(--text3); margin-left: 6px; }
+  .legend-key { font-size: 11px; color: var(--text3); margin-left: 4px; }
 
-  .graph-scroll { overflow-x: auto; padding-bottom: 4px; }
-  .month-row {
-    display: grid; grid-template-columns: repeat(53, 1fr);
-    gap: 3px; min-width: 730px; margin-bottom: 4px;
-  }
-  .month-row span { font-size: 10px; color: var(--text3); text-align: center; }
-  .graph {
-    display: grid; grid-template-columns: repeat(53, 1fr);
-    gap: 3px; min-width: 730px; cursor: crosshair; user-select: none;
-  }
-  .cell { aspect-ratio: 1; border-radius: 2px; min-width: 0; transition: opacity .1s; }
+  /* GRAPH */
+  .graph-wrap { position: relative; }
+  .day-labels { position: absolute; left: 0; top: 20px; display: flex; flex-direction: column; gap: 3px; }
+  .day-labels span { font-size: 9px; color: var(--text3); height: 13px; line-height: 13px; width: 22px; text-align: right; padding-right: 4px; }
+  .graph-scroll { overflow-x: auto; padding-bottom: 4px; padding-left: 26px; }
+  .month-row { display: grid; grid-template-columns: repeat(53, 13px); gap: 3px; min-width: 0; margin-bottom: 3px; }
+  .month-row span { font-size: 10px; color: var(--text3); text-align: left; }
+  .graph { display: grid; grid-template-columns: repeat(53, 13px); grid-template-rows: repeat(7, 13px); grid-auto-flow: column; gap: 3px; cursor: crosshair; user-select: none; }
+  .cell { width: 13px; height: 13px; border-radius: 2px; transition: opacity .1s; }
   .cell:hover { opacity: .65; }
+  .cell.out { opacity: .15; cursor: default; pointer-events: none; }
 
-  .stats {
-    display: flex; gap: 20px; margin-top: 10px;
-    padding-top: 10px; border-top: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
+  .stats { display: flex; gap: 20px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); flex-wrap: wrap; }
   .stat { font-size: 12px; color: var(--text2); }
   .stat b { color: var(--text); font-weight: 600; }
 
-  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
-  button {
-    height: 34px; padding: 0 16px; border-radius: 6px; font-size: 13px;
-    font-weight: 500; cursor: pointer; border: 1px solid var(--border);
-    background: var(--bg3); color: var(--text);
-    transition: background .15s, opacity .15s; white-space: nowrap;
-  }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  button { height: 34px; padding: 0 16px; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--bg3); color: var(--text); transition: background .15s, opacity .15s; white-space: nowrap; }
   button:hover { background: #30363d; }
   button:disabled { opacity: .4; cursor: not-allowed; }
   button.primary { background: var(--green-btn); border-color: #2ea043; color: #fff; }
-  button.primary:hover:not(:disabled) { background: var(--green-btn-hover); }
+  button.primary:hover:not(:disabled) { background: var(--green-hover); }
   button.danger { border-color: #6e2e2e; color: var(--red); }
   button.danger:hover { background: #2a1515; }
 
-  .progress { display: none; margin-top: 14px; }
-  .progress.visible { display: block; }
+  .progress { display: none; margin-top: 12px; }
+  .progress.on { display: block; }
   .bar-wrap { background: var(--bg3); border-radius: 4px; height: 6px; overflow: hidden; margin-bottom: 8px; }
   .bar { height: 100%; background: var(--green); width: 0%; border-radius: 4px; transition: width .3s; }
-  .log {
-    background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
-    padding: 10px 12px; font-family: 'SFMono-Regular', Consolas, monospace;
-    font-size: 12px; color: var(--text2); max-height: 180px; overflow-y: auto;
-    line-height: 1.8; white-space: pre-wrap;
-  }
+  .log { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 12px; color: var(--text2); max-height: 160px; overflow-y: auto; line-height: 1.8; white-space: pre-wrap; }
   .log .ok { color: var(--green); }
   .log .err { color: var(--red); }
+  .status-bar { margin-top: 10px; padding: 8px 14px; border-radius: 6px; font-size: 13px; display: none; }
+  .status-bar.ok { display: block; background: #0d2b1a; color: var(--green); border: 1px solid #1a4a2a; }
+  .status-bar.err { display: block; background: #2a1515; color: var(--red); border: 1px solid #4a2020; }
 
-  .status-bar {
-    margin-top: 12px; padding: 8px 14px; border-radius: 6px;
-    font-size: 13px; display: none; align-items: center; gap: 8px;
-  }
-  .status-bar.ok { display: flex; background: #0d2b1a; color: var(--green); border: 1px solid #1a4a2a; }
-  .status-bar.err { display: flex; background: #2a1515; color: var(--red); border: 1px solid #4a2020; }
-
-  @media (max-width: 600px) {
-    body { padding: 16px 10px; }
-    .field-row { flex-direction: column; }
-  }
+  @media (max-width: 600px) { body { padding: 14px 10px; } .field-row { flex-direction: column; } }
 </style>
 </head>
 <body>
 <div class="container">
-
   <header>
     <h1>GitHub Contribution Painter</h1>
-    <p>
-      Рисует паттерн на GitHub графе через API — без терминала и скриптов.<br>
-      Нужен <a href="https://github.com/settings/tokens/new?scopes=repo" target="_blank">Personal Access Token</a>
-      с правом <code>repo</code> и пустой репозиторий.
-    </p>
+    <p>Рисует паттерн на GitHub графе через API — без терминала. Нужен <a href="https://github.com/settings/tokens/new?scopes=repo" target="_blank">токен</a> с правом <code>repo</code> и пустой репо с README.</p>
   </header>
 
   <div class="card">
@@ -170,36 +99,27 @@
       <div class="field">
         <label>GitHub Token</label>
         <input type="password" id="token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
-        <div class="hint">
-          <a href="https://github.com/settings/tokens/new?scopes=repo" target="_blank">Создать токен</a>
-          — нужна галочка <b>repo</b>. Токен не сохраняется и не передаётся никуда, кроме api.github.com.
-        </div>
+        <div class="hint"><a href="https://github.com/settings/tokens/new?scopes=repo" target="_blank">Создать токен</a> — нужна галочка <b>repo</b>.</div>
       </div>
       <div class="field">
         <label>Репозиторий</label>
         <input type="text" id="repo" placeholder="username/repo-name">
-        <div class="hint">Репо должно существовать на GitHub и быть <b>пустым</b>.</div>
+        <div class="hint">Должен существовать и содержать хотя бы один коммит (README).</div>
       </div>
     </div>
     <div class="field-row" style="margin-top:10px">
       <div class="field">
-        <label>Твой email на GitHub</label>
+        <label>Email (как на GitHub)</label>
         <input type="text" id="email" placeholder="you@example.com">
-        <div class="hint">Должен совпадать с email в <a href="https://github.com/settings/emails" target="_blank">настройках GitHub</a> — иначе коммиты не появятся на графе.</div>
+        <div class="hint"><a href="https://github.com/settings/emails" target="_blank">Проверить email</a> — должен совпадать, иначе граф не обновится.</div>
       </div>
       <div class="field">
-        <label>Твоё имя (git)</label>
+        <label>Имя (git)</label>
         <input type="text" id="gitname" placeholder="Your Name">
       </div>
-    </div>
-    <div class="field-row" style="margin-top:10px">
       <div class="field">
         <label>Ветка</label>
         <input type="text" id="branch" value="main">
-      </div>
-      <div class="field">
-        <label>Начало графа (воскресенье)</label>
-        <input type="date" id="startDate">
       </div>
       <div class="field">
         <label>Множитель коммитов</label>
@@ -209,8 +129,15 @@
           <option value="5" selected>×5 — рекомендую</option>
           <option value="10">×10 — насыщенно</option>
         </select>
-        <div class="hint">Больше коммитов = ярче зелёный цвет на графе.</div>
       </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Год</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <select id="selYear" style="width:120px"></select>
+      <span class="hint" style="margin:0">Граф отображает весь выбранный год</span>
     </div>
   </div>
 
@@ -218,20 +145,27 @@
     <div class="card-title">Редактор</div>
     <div class="legend">
       <span class="legend-label">Интенсивность:</span>
-      <div class="swatch sel" data-level="0" style="background:#21262d" title="Пусто"></div>
+      <div class="swatch sel" data-level="0" style="background:#21262d" title="Пусто (0)"></div>
       <div class="swatch" data-level="1" style="background:#0D4429" title="Уровень 1"></div>
       <div class="swatch" data-level="2" style="background:#016C31" title="Уровень 2"></div>
       <div class="swatch" data-level="3" style="background:#26A641" title="Уровень 3"></div>
       <div class="swatch" data-level="4" style="background:#39D353" title="Уровень 4"></div>
-      <span class="legend-key">клавиши 0–4 &nbsp;|&nbsp; зажми и веди мышью для рисования</span>
+      <span class="legend-key">клавиши 0–4 &nbsp;|&nbsp; зажми и веди мышью</span>
     </div>
-    <div class="graph-scroll">
-      <div class="month-row" id="months"></div>
-      <div class="graph" id="graph"></div>
+    <div class="graph-wrap">
+      <div class="day-labels">
+        <span></span><span>Mon</span><span></span><span>Wed</span>
+        <span></span><span>Fri</span><span></span>
+      </div>
+      <div class="graph-scroll">
+        <div class="month-row" id="months"></div>
+        <div class="graph" id="graph"></div>
+      </div>
     </div>
     <div class="stats">
       <div class="stat">Закрашено дней: <b id="sDays">0</b></div>
-      <div class="stat">Коммитов всего: <b id="sCommits">0</b></div>
+      <div class="stat">Коммитов: <b id="sCommits">0</b></div>
+      <div class="stat">Период: <b id="sPeriod">—</b></div>
     </div>
     <div class="btn-row">
       <button class="danger" id="clearBtn">Очистить</button>
@@ -245,221 +179,254 @@
     </div>
     <div class="status-bar" id="statusBar"></div>
   </div>
-
 </div>
-<script>
-const COLS=53,ROWS=7;
-const COLORS=['#21262d','#0D4429','#016C31','#26A641','#39D353'];
-let grid=Array(COLS*ROWS).fill(0),selLevel=0,isDown=false;
 
-// default start: ~1 year ago, nearest Sunday
+<script>
+const COLS=53, ROWS=7;
+const COLORS=['#21262d','#0D4429','#016C31','#26A641','#39D353'];
+let grid=Array(COLS*ROWS).fill(0), selLevel=0, isDown=false;
+let startDate = new Date(); // actual Sunday start
+
+// ── Year selector ──
 (()=>{
-  const d=new Date();
-  d.setDate(d.getDate()-d.getDay()-52*7);
-  document.getElementById('startDate').value=d.toISOString().split('T')[0];
+  const sel = document.getElementById('selYear');
+  const now = new Date().getFullYear();
+  for(let y = now + 1; y >= now - 10; y--){
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    if(y === now) o.selected = true;
+    sel.appendChild(o);
+  }
+  sel.addEventListener('change', ()=> setYear(+sel.value));
 })();
 
-const graphEl=document.getElementById('graph');
-const monthsEl=document.getElementById('months');
+function setYear(year){
+  // start = Sunday on or before Jan 1 of that year
+  const jan1 = new Date(year, 0, 1);
+  const sun = new Date(jan1);
+  sun.setDate(jan1.getDate() - jan1.getDay());
+  sun.setHours(12,0,0,0);
+  startDate = sun;
+  rebuildGraph();
+}
 
-function buildGrid(){
-  graphEl.innerHTML='';monthsEl.innerHTML='';
-  for(let c=0;c<COLS;c++) monthsEl.appendChild(document.createElement('span'));
-  updateMonths();
-  for(let c=0;c<COLS;c++){
-    for(let r=0;r<ROWS;r++){
-      const cell=document.createElement('div');
-      cell.className='cell';
-      cell.dataset.i=c*ROWS+r;
-      cell.style.background=COLORS[0];
-      cell.addEventListener('mousedown',e=>{e.preventDefault();isDown=true;paint(cell);});
-      cell.addEventListener('mouseenter',()=>{if(isDown)paint(cell);});
+// ── Graph ──
+const graphEl = document.getElementById('graph');
+const monthsEl = document.getElementById('months');
+
+function rebuildGraph(){
+  grid = Array(COLS*ROWS).fill(0);
+  graphEl.innerHTML = '';
+  monthsEl.innerHTML = '';
+
+  // month labels
+  let lastM = -1;
+  for(let c=0; c<COLS; c++){
+    const d = new Date(startDate);
+    d.setDate(d.getDate() + c*7);
+    const span = document.createElement('span');
+    if(d.getMonth() !== lastM){ span.textContent = d.toLocaleString('default',{month:'short'}); lastM = d.getMonth(); }
+    monthsEl.appendChild(span);
+  }
+
+  // cells — grid-auto-flow: column means col*ROWS+row = index
+  const today = new Date(); today.setHours(23,59,59,999);
+  for(let c=0; c<COLS; c++){
+    for(let r=0; r<ROWS; r++){
+      const d = new Date(startDate);
+      d.setDate(d.getDate() + c*7 + r);
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      cell.dataset.i = c*ROWS + r;
+      cell.dataset.ts = d.getTime();
+      // grey out future dates
+      if(d > today) cell.classList.add('out');
+      cell.style.background = COLORS[0];
+      cell.addEventListener('mousedown', e=>{ e.preventDefault(); isDown=true; paint(cell); });
+      cell.addEventListener('mouseenter', ()=>{ if(isDown) paint(cell); });
       graphEl.appendChild(cell);
     }
   }
+  updateStats();
 }
 
 function paint(cell){
-  const i=+cell.dataset.i;
-  grid[i]=selLevel;
-  cell.style.background=COLORS[selLevel];
+  if(cell.classList.contains('out')) return;
+  const i = +cell.dataset.i;
+  grid[i] = selLevel;
+  cell.style.background = COLORS[selLevel];
   updateStats();
 }
 
 function updateStats(){
-  const mult=+document.getElementById('multiplier').value;
-  document.getElementById('sDays').textContent=grid.filter(v=>v>0).length;
-  document.getElementById('sCommits').textContent=grid.reduce((a,v)=>a+v*mult,0).toLocaleString();
+  const mult = +document.getElementById('multiplier').value;
+  document.getElementById('sDays').textContent = grid.filter(v=>v>0).length;
+  document.getElementById('sCommits').textContent = grid.reduce((a,v)=>a+v*mult,0).toLocaleString();
+  // period
+  const end = new Date(startDate); end.setDate(end.getDate() + COLS*7 - 1);
+  const fmt = d => d.toLocaleDateString('ru', {day:'numeric', month:'short', year:'numeric'});
+  document.getElementById('sPeriod').textContent = fmt(startDate) + ' — ' + fmt(end);
 }
 
-function updateMonths(){
-  const start=getStart();
-  const spans=monthsEl.querySelectorAll('span');
-  let last=-1;
-  for(let c=0;c<COLS;c++){
-    const d=new Date(start);d.setDate(d.getDate()+c*7);
-    const m=d.getMonth();
-    spans[c].textContent=m!==last?d.toLocaleString('default',{month:'short'}):'';
-    last=m;
-  }
-}
-
-function getStart(){return new Date(document.getElementById('startDate').value+'T12:00:00');}
-
+// ── Controls ──
 document.querySelectorAll('.swatch').forEach(s=>s.addEventListener('click',()=>{
-  selLevel=+s.dataset.level;
-  document.querySelectorAll('.swatch').forEach(x=>x.classList.toggle('sel',x===s));
+  selLevel = +s.dataset.level;
+  document.querySelectorAll('.swatch').forEach(x=>x.classList.toggle('sel', x===s));
 }));
 
-document.addEventListener('keydown',e=>{
-  if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;
-  const n=parseInt(e.key);
-  if(n>=0&&n<=4){selLevel=n;document.querySelectorAll('.swatch').forEach(s=>s.classList.toggle('sel',+s.dataset.level===n));}
+document.addEventListener('keydown', e=>{
+  if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) return;
+  const n = parseInt(e.key);
+  if(n>=0 && n<=4){ selLevel=n; document.querySelectorAll('.swatch').forEach(s=>s.classList.toggle('sel',+s.dataset.level===n)); }
 });
-document.addEventListener('mouseup',()=>isDown=false);
-document.getElementById('startDate').addEventListener('change',updateMonths);
-document.getElementById('multiplier').addEventListener('change',updateStats);
+document.addEventListener('mouseup', ()=>isDown=false);
+document.getElementById('multiplier').addEventListener('change', updateStats);
 
 document.getElementById('clearBtn').addEventListener('click',()=>{
-  grid=Array(COLS*ROWS).fill(0);
-  document.querySelectorAll('.cell').forEach(c=>c.style.background=COLORS[0]);
+  grid = Array(COLS*ROWS).fill(0);
+  document.querySelectorAll('.cell:not(.out)').forEach(c=>c.style.background=COLORS[0]);
   updateStats(); setStatus('');
 });
 document.getElementById('fillBtn').addEventListener('click',()=>{
-  grid=grid.map(()=>selLevel);
-  document.querySelectorAll('.cell').forEach(c=>c.style.background=COLORS[selLevel]);
+  document.querySelectorAll('.cell:not(.out)').forEach(c=>{
+    const i=+c.dataset.i; grid[i]=selLevel; c.style.background=COLORS[selLevel];
+  });
   updateStats();
 });
 document.getElementById('invertBtn').addEventListener('click',()=>{
-  grid=grid.map(v=>v===0?selLevel:0);
-  document.querySelectorAll('.cell').forEach(c=>{const i=+c.dataset.i;c.style.background=COLORS[grid[i]];});
+  document.querySelectorAll('.cell:not(.out)').forEach(c=>{
+    const i=+c.dataset.i; grid[i]=grid[i]===0?selLevel:0; c.style.background=COLORS[grid[i]];
+  });
   updateStats();
 });
 
-// ── logging ──
-function addLog(msg,type){
-  const log=document.getElementById('log');
-  const span=document.createElement('span');
-  if(type)span.className=type;
-  span.textContent=msg+'\n';
+// ── Logging ──
+function addLog(msg, type){
+  const log = document.getElementById('log');
+  const span = document.createElement('span');
+  if(type) span.className = type;
+  span.textContent = msg + '\n';
   log.appendChild(span);
-  log.scrollTop=log.scrollHeight;
+  log.scrollTop = log.scrollHeight;
 }
-function setStatus(msg,type){
-  const el=document.getElementById('statusBar');
-  el.className='status-bar'+(type?' '+type:'');
-  el.textContent=msg;
+function setStatus(msg, type){
+  const el = document.getElementById('statusBar');
+  el.className = 'status-bar' + (type?' '+type:'');
+  el.textContent = msg;
 }
 
 // ── GitHub API ──
-async function api(token,method,path,body){
-  const r=await fetch('https://api.github.com'+path,{
+async function api(token, method, path, body){
+  const r = await fetch('https://api.github.com'+path, {
     method,
-    headers:{'Authorization':'token '+token,'Content-Type':'application/json','Accept':'application/vnd.github+json'},
-    body:body?JSON.stringify(body):undefined
+    headers:{ 'Authorization':'token '+token, 'Content-Type':'application/json', 'Accept':'application/vnd.github+json' },
+    body: body ? JSON.stringify(body) : undefined
   });
-  if(r.status===204)return null;
-  const data=await r.json();
-  if(!r.ok)throw new Error(data.message||'HTTP '+r.status);
+  if(r.status===204) return null;
+  const data = await r.json();
+  if(!r.ok) throw new Error(data.message || 'HTTP '+r.status);
   return data;
 }
 
 async function doPush(){
-  const token=document.getElementById('token').value.trim();
-  const repo=document.getElementById('repo').value.trim();
-  const branch=document.getElementById('branch').value.trim()||'main';
-  const mult=+document.getElementById('multiplier').value;
-  const email=document.getElementById('email').value.trim();
-  const gitname=document.getElementById('gitname').value.trim()||'GitHub Painter';
-  const start=getStart();
+  const token   = document.getElementById('token').value.trim();
+  const repo    = document.getElementById('repo').value.trim();
+  const branch  = document.getElementById('branch').value.trim() || 'main';
+  const mult    = +document.getElementById('multiplier').value;
+  const email   = document.getElementById('email').value.trim();
+  const gitname = document.getElementById('gitname').value.trim() || 'GitHub Painter';
 
-  if(!token){alert('Введи GitHub токен');return;}
-  if(!repo||!repo.includes('/')){alert('Введи репозиторий в формате username/repo');return;}
-  if(!email){alert('Введи email — он должен совпадать с email в настройках GitHub');return;}
+  if(!token) { alert('Введи GitHub токен'); return; }
+  if(!repo || !repo.includes('/')) { alert('Введи репозиторий в формате username/repo'); return; }
+  if(!email) { alert('Введи email — он должен совпадать с email в настройках GitHub'); return; }
 
-  const commits=[];
-  for(let c=0;c<COLS;c++){
-    for(let r=0;r<ROWS;r++){
-      const level=grid[c*ROWS+r];
-      if(!level)continue;
-      const d=new Date(start);d.setDate(d.getDate()+c*7+r);
-      const iso=d.toISOString().replace(/\.\d{3}Z$/,'+00:00');
-      for(let k=0;k<level*mult;k++) commits.push({date:iso,idx:`${c}-${r}-${k}`});
+  // build commit list
+  const commits = [];
+  for(let c=0; c<COLS; c++){
+    for(let r=0; r<ROWS; r++){
+      const level = grid[c*ROWS+r];
+      if(!level) continue;
+      const d = new Date(startDate);
+      d.setDate(d.getDate() + c*7 + r);
+      d.setHours(12,0,0,0);
+      const iso = d.toISOString().replace(/\.\d{3}Z$/, '+00:00');
+      for(let k=0; k<level*mult; k++) commits.push({ date:iso, idx:`${c}-${r}-${k}` });
     }
   }
-  if(!commits.length){alert('Нарисуй что-нибудь на сетке');return;}
+  if(!commits.length){ alert('Нарисуй что-нибудь на сетке'); return; }
 
-  const btn=document.getElementById('pushBtn');
-  btn.disabled=true;
-  const prog=document.getElementById('progress');
-  prog.classList.add('visible');
-  document.getElementById('log').innerHTML='';
-  document.getElementById('bar').style.width='0%';
+  const btn = document.getElementById('pushBtn');
+  btn.disabled = true;
+  const prog = document.getElementById('progress');
+  prog.classList.add('on');
+  document.getElementById('log').innerHTML = '';
+  document.getElementById('bar').style.width = '0%';
   setStatus('');
 
   try{
     addLog('Проверяем репозиторий...');
-    await api(token,'GET',`/repos/${repo}`);
-    addLog(`✓ Репо найдено: ${repo}`,'ok');
+    await api(token, 'GET', `/repos/${repo}`);
+    addLog(`✓ Репо найдено: ${repo}`, 'ok');
 
-    let baseSha=null,baseTreeSha=null;
+    let baseSha=null, baseTreeSha=null;
     try{
-      const ref=await api(token,'GET',`/repos/${repo}/git/ref/heads/${branch}`);
-      baseSha=ref.object.sha;
-      const c0=await api(token,'GET',`/repos/${repo}/git/commits/${baseSha}`);
-      baseTreeSha=c0.tree.sha;
-      addLog(`✓ Ветка "${branch}" найдена`,'ok');
+      const ref = await api(token, 'GET', `/repos/${repo}/git/ref/heads/${branch}`);
+      baseSha = ref.object.sha;
+      const c0 = await api(token, 'GET', `/repos/${repo}/git/commits/${baseSha}`);
+      baseTreeSha = c0.tree.sha;
+      addLog(`✓ Ветка "${branch}" найдена`, 'ok');
     }catch{
       addLog(`Ветка "${branch}" не найдена — создадим новую`);
     }
 
     addLog('Создаём blob...');
-    const blob=await api(token,'POST',`/repos/${repo}/git/blobs`,{content:'github-painter\n',encoding:'utf-8'});
+    const blob = await api(token, 'POST', `/repos/${repo}/git/blobs`, { content:'github-painter\n', encoding:'utf-8' });
 
-    const total=commits.length;
-    let done=0,currentSha=baseSha,currentTree=baseTreeSha;
+    const total = commits.length;
+    let done=0, currentSha=baseSha, currentTree=baseTreeSha;
     addLog(`Создаём ${total.toLocaleString()} коммитов...`);
 
     for(const cm of commits){
-      const treePayload={tree:[{path:'pattern.txt',mode:'100644',type:'blob',sha:blob.sha}]};
-      if(currentTree)treePayload.base_tree=currentTree;
-      const tree=await api(token,'POST',`/repos/${repo}/git/trees`,treePayload);
+      const treePayload = { tree:[{ path:'pattern.txt', mode:'100644', type:'blob', sha:blob.sha }] };
+      if(currentTree) treePayload.base_tree = currentTree;
+      const tree = await api(token, 'POST', `/repos/${repo}/git/trees`, treePayload);
 
-      const commitPayload={
-        message:`painted ${cm.idx}`,tree:tree.sha,
-        author:{name:gitname,email:email,date:cm.date},
-        committer:{name:gitname,email:email,date:cm.date},
-        parents:currentSha?[currentSha]:[]
-      };
-      const newCommit=await api(token,'POST',`/repos/${repo}/git/commits`,commitPayload);
-      currentSha=newCommit.sha;currentTree=tree.sha;
+      const newCommit = await api(token, 'POST', `/repos/${repo}/git/commits`, {
+        message: `painted ${cm.idx}`, tree: tree.sha,
+        author:    { name:gitname, email:email, date:cm.date },
+        committer: { name:gitname, email:email, date:cm.date },
+        parents: currentSha ? [currentSha] : []
+      });
+      currentSha = newCommit.sha; currentTree = tree.sha;
 
       done++;
-      const pct=Math.round(done/total*100);
-      document.getElementById('bar').style.width=pct+'%';
-      if(done%25===0||done===total) addLog(`  [${pct}%] ${done}/${total}`);
+      const pct = Math.round(done/total*100);
+      document.getElementById('bar').style.width = pct+'%';
+      if(done%25===0 || done===total) addLog(`  [${pct}%] ${done}/${total}`);
     }
 
     addLog('Обновляем ветку...');
     if(baseSha){
-      await api(token,'PATCH',`/repos/${repo}/git/refs/heads/${branch}`,{sha:currentSha,force:true});
-    }else{
-      await api(token,'POST',`/repos/${repo}/git/refs`,{ref:`refs/heads/${branch}`,sha:currentSha});
+      await api(token, 'PATCH', `/repos/${repo}/git/refs/heads/${branch}`, { sha:currentSha, force:true });
+    } else {
+      await api(token, 'POST', `/repos/${repo}/git/refs`, { ref:`refs/heads/${branch}`, sha:currentSha });
     }
 
-    addLog(`✓ Готово! Открой github.com/${repo}`,'ok');
-    document.getElementById('bar').style.width='100%';
-    setStatus(`✓ Готово! Паттерн применён → github.com/${repo}`,'ok');
+    addLog(`✓ Готово! → github.com/${repo}`, 'ok');
+    document.getElementById('bar').style.width = '100%';
+    setStatus(`✓ Готово! Паттерн применён → github.com/${repo}`, 'ok');
 
   }catch(e){
-    addLog('✗ Ошибка: '+e.message,'err');
-    setStatus('Ошибка: '+e.message,'err');
+    addLog('✗ Ошибка: '+e.message, 'err');
+    setStatus('Ошибка: '+e.message, 'err');
   }
-  btn.disabled=false;
+  btn.disabled = false;
 }
 
-document.getElementById('pushBtn').addEventListener('click',doPush);
-buildGrid();updateStats();
+document.getElementById('pushBtn').addEventListener('click', doPush);
+
+// ── Init ──
+setYear(new Date().getFullYear());
 </script>
 </body>
 </html>
